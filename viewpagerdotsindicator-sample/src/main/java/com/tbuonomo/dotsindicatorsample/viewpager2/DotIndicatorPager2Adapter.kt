@@ -13,7 +13,7 @@ class DotIndicatorPager2Adapter : RecyclerView.Adapter<ViewHolder>() {
             LayoutInflater.from(parent.context).inflate(R.layout.material_page, parent, false)) {}
   }
 
-  override fun getItemCount() = 10
+  override fun getItemCount() = 100
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     // Empty

@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.FrameLayout
@@ -206,7 +207,7 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
                     refreshDots()
                 }
             override val currentItem: Int
-                get() = viewPager.currentItem % realCount
+                get() = viewPager.currentItem
 
             override fun setCurrentItem(item: Int, smoothScroll: Boolean) {
                 viewPager.setCurrentItem(item, smoothScroll)
@@ -262,7 +263,7 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
                 get() = viewPager2.adapter?.itemCount ?: 0
             override var realCount: Int = count
             override val currentItem: Int
-                get() = viewPager2.currentItem % realCount
+                get() = viewPager2.currentItem
 
 
             override fun setCurrentItem(item: Int, smoothScroll: Boolean) {
@@ -279,7 +280,7 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
                     override fun onPageScrolled(position: Int, positionOffset: Float,
                                                 positionOffsetPixels: Int) {
                         super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                        onPageChangeListenerHelper.onPageScrolled(position, positionOffset)
+                        onPageChangeListenerHelper.onPageScrolled(position % (pager?.realCount ?: 1), positionOffset)
                     }
                 }
                 viewPager2.registerOnPageChangeCallback(onPageChangeCallback!!)

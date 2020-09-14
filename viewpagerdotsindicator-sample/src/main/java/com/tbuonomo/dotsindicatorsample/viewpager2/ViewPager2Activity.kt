@@ -36,5 +36,7 @@ class ViewPager2Activity : AppCompatActivity() {
     dotsIndicator.setViewPager2(viewPager2)
     springDotsIndicator.setViewPager2(viewPager2)
     wormDotsIndicator.setViewPager2(viewPager2)
+    dotsIndicator.pager?.realCount = 3
+
   }
 }

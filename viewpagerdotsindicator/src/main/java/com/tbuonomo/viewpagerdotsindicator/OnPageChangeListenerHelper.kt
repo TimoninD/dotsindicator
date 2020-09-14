@@ -1,5 +1,7 @@
 package com.tbuonomo.viewpagerdotsindicator
 
+import android.util.Log
+
 abstract class OnPageChangeListenerHelper {
   private var lastLeftPosition: Int = -1
   private var lastRightPosition: Int = -1
@@ -8,6 +10,7 @@ abstract class OnPageChangeListenerHelper {
 
   fun onPageScrolled(position: Int, positionOffset: Float) {
     var offset = (position + positionOffset)
+    Log.e("Offset",positionOffset.toString())
     val lastPageIndex = (pageCount - 1).toFloat()
     if (offset == lastPageIndex) {
       offset = lastPageIndex - .0001f
@@ -38,6 +41,7 @@ abstract class OnPageChangeListenerHelper {
 
     lastLeftPosition = leftPosition
     lastRightPosition = rightPosition
+
   }
 
   internal abstract fun onPageScrolled(selectedPosition: Int, nextPosition: Int,
