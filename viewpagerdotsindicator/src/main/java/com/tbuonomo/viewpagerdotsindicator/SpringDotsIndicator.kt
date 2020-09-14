@@ -101,7 +101,7 @@ class SpringDotsIndicator @JvmOverloads constructor(context: Context, attrs: Att
   override fun addDot(index: Int) {
     val dot = buildDot(true)
     dot.setOnClickListener {
-      if (dotsClickable && index < pager?.count ?: 0) {
+      if (dotsClickable && index < pager?.realCount ?: 0) {
         pager!!.setCurrentItem(index, true)
       }
     }

@@ -38,7 +38,7 @@ class DotsIndicator @JvmOverloads constructor(context: Context, attrs: Attribute
 
   private fun init(attrs: AttributeSet?) {
     linearLayout = LinearLayout(context)
-    linearLayout!!.orientation = LinearLayout.HORIZONTAL
+    linearLayout?.orientation = LinearLayout.HORIZONTAL
     addView(linearLayout, WRAP_CONTENT, WRAP_CONTENT)
 
     dotsWidthFactor = DEFAULT_WIDTH_FACTOR
@@ -87,17 +87,17 @@ class DotsIndicator @JvmOverloads constructor(context: Context, attrs: Attribute
     imageView.setBackgroundDrawable(background)
 
     dot.setOnClickListener {
-      if (dotsClickable && index < pager?.count ?: 0) {
-        pager!!.setCurrentItem(index, true)
+      if (dotsClickable && index < pager?.realCount ?: 0) {
+        pager?.setCurrentItem(index, true)
       }
     }
 
     dots.add(imageView)
-    linearLayout!!.addView(dot)
+    linearLayout?.addView(dot)
   }
 
   override fun removeDot(index: Int) {
-    linearLayout!!.removeViewAt(childCount - 1)
+    linearLayout?.removeViewAt(childCount - 1)
     dots.removeAt(dots.size - 1)
   }
 
