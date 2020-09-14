@@ -185,10 +185,10 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
         }
 
         viewPager.adapter!!.registerDataSetObserver(object : DataSetObserver() {
-          override fun onChanged() {
-            super.onChanged()
-            refreshDots()
-          }
+            override fun onChanged() {
+                super.onChanged()
+                refreshDots()
+            }
         })
 
         pager = object : Pager {
@@ -196,8 +196,6 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
 
             override val isNotEmpty: Boolean
                 get() = viewPager.isNotEmpty
-            override val currentItem: Int
-                get() = viewPager.currentItem
             override val isEmpty: Boolean
                 get() = viewPager.isEmpty
             override val count: Int
@@ -207,6 +205,8 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
                     field = value
                     refreshDots()
                 }
+            override val currentItem: Int
+                get() = viewPager.currentItem % realCount
 
             override fun setCurrentItem(item: Int, smoothScroll: Boolean) {
                 viewPager.setCurrentItem(item, smoothScroll)
@@ -245,10 +245,10 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
 
 
         viewPager2.adapter?.registerAdapterDataObserver(object : AdapterDataObserver() {
-          override fun onChanged() {
-            super.onChanged()
-            refreshDots()
-          }
+            override fun onChanged() {
+                super.onChanged()
+                refreshDots()
+            }
         })
 
         pager = object : Pager {
@@ -256,15 +256,16 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
 
             override val isNotEmpty: Boolean
                 get() = viewPager2.isNotEmpty
-            override val currentItem: Int
-                get() = viewPager2.currentItem
             override val isEmpty: Boolean
                 get() = viewPager2.isEmpty
             override val count: Int
                 get() = viewPager2.adapter?.itemCount ?: 0
-          override var realCount: Int = count
+            override var realCount: Int = count
+            override val currentItem: Int
+                get() = viewPager2.currentItem % realCount
 
-          override fun setCurrentItem(item: Int, smoothScroll: Boolean) {
+
+            override fun setCurrentItem(item: Int, smoothScroll: Boolean) {
                 viewPager2.setCurrentItem(item, smoothScroll)
             }
 
