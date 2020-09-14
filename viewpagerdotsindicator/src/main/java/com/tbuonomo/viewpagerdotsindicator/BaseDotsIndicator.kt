@@ -203,6 +203,10 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
             override val count: Int
                 get() = viewPager.adapter?.count ?: 0
             override var realCount: Int = count
+                set(value) {
+                    field = value
+                    refreshDots()
+                }
 
             override fun setCurrentItem(item: Int, smoothScroll: Boolean) {
                 viewPager.setCurrentItem(item, smoothScroll)
