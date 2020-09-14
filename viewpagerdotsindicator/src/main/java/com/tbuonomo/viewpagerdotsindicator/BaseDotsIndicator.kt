@@ -207,7 +207,7 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
                     refreshDots()
                 }
             override val currentItem: Int
-                get() = viewPager.currentItem
+                get() = viewPager.currentItem % realCount
 
             override fun setCurrentItem(item: Int, smoothScroll: Boolean) {
                 viewPager.setCurrentItem(item, smoothScroll)
@@ -263,7 +263,7 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
                 get() = viewPager2.adapter?.itemCount ?: 0
             override var realCount: Int = count
             override val currentItem: Int
-                get() = viewPager2.currentItem
+                get() = viewPager2.currentItem % realCount
 
 
             override fun setCurrentItem(item: Int, smoothScroll: Boolean) {
@@ -280,7 +280,8 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
                     override fun onPageScrolled(position: Int, positionOffset: Float,
                                                 positionOffsetPixels: Int) {
                         super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                        onPageChangeListenerHelper.onPageScrolled(position % (pager?.realCount ?: 1), positionOffset)
+                        onPageChangeListenerHelper.onPageScrolled(position % (pager?.realCount
+                                ?: 1), positionOffset)
                     }
                 }
                 viewPager2.registerOnPageChangeCallback(onPageChangeCallback!!)

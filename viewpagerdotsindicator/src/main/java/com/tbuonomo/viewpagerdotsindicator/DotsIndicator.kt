@@ -105,7 +105,6 @@ class DotsIndicator @JvmOverloads constructor(context: Context, attrs: Attribute
     override fun buildOnPageChangedListener(): OnPageChangeListenerHelper {
         return object : OnPageChangeListenerHelper() {
             override fun onPageScrolled(selectedPosition: Int, nextPosition: Int, positionOffset: Float) {
-                Log.e("S N P ", "$selectedPosition $nextPosition $positionOffset")
                 val selectedDot = dots[selectedPosition]
                 // Selected dot
                 val selectedDotWidth = (dotsSize + dotsSize * (dotsWidthFactor - 1) * (1 - positionOffset)).toInt()
