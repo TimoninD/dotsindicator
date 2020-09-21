@@ -260,7 +260,7 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
             override val isEmpty: Boolean
                 get() = viewPager2.isEmpty
             override val count: Int
-                get() = viewPager2.adapter?.itemCount ?: 0
+                get() = viewPager2.adapter?.itemCount ?: 1
             override var realCount: Int = count
             override val currentItem: Int
                 get() = viewPager2.currentItem % realCount
