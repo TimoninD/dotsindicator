@@ -203,13 +203,13 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
                 get() = viewPager.isEmpty
             override val count: Int
                 get() = viewPager.adapter?.count ?: 0
-            override var realCount: Int = count
+            override var realCount: Int = if (count < MAX_VP_SIZE) count else  MAX_VP_SIZE
                 set(value) {
                     field = value
                     refreshDots()
                 }
             override val currentItem: Int
-                get() = viewPager.currentItem % realCount
+                get() = if (realCount > 0) viewPager.currentItem % realCount else viewPager.currentItem
 
             override fun setCurrentItem(item: Int, smoothScroll: Boolean) {
                 viewPager.setCurrentItem(item, smoothScroll)
@@ -263,12 +263,9 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
                 get() = viewPager2.isEmpty
             override val count: Int
                 get() = viewPager2.adapter?.itemCount ?: 1
-            override var realCount: Int = if (count < MAX_VP_SIZE) count else MAX_VP_SIZE
-                set(value) {
-                    field = if (value > 0) value else 1
-                }
+            override var realCount: Int = if (count < MAX_VP_SIZE) count else  MAX_VP_SIZE
             override val currentItem: Int
-                get() = viewPager2.currentItem % realCount
+                get() = if (realCount > 0) viewPager2.currentItem % realCount else viewPager2.currentItem
 
 
             override fun setCurrentItem(item: Int, smoothScroll: Boolean) {
