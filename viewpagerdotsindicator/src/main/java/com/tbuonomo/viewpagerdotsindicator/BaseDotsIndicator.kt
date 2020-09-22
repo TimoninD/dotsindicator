@@ -17,6 +17,8 @@ import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 
+private const val MAX_VP_SIZE = 50
+
 abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
                                                            attrs: AttributeSet? = null,
                                                            defStyleAttr: Int = 0) :
@@ -261,7 +263,7 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
                 get() = viewPager2.isEmpty
             override val count: Int
                 get() = viewPager2.adapter?.itemCount ?: 1
-            override var realCount: Int = count
+            override var realCount: Int = if (count < MAX_VP_SIZE) count else MAX_VP_SIZE
             override val currentItem: Int
                 get() = viewPager2.currentItem % realCount
 
