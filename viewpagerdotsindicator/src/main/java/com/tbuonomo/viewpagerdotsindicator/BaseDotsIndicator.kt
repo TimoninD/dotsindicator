@@ -16,6 +16,7 @@ import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import kotlinx.android.synthetic.main.dot_layout.view.*
 
 private const val MAX_VP_SIZE = 50
 
@@ -151,17 +152,19 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
     }
 
     private fun refreshOnPageChangedListener() {
-        if (pager!!.isNotEmpty) {
-            pager!!.removeOnPageChangeListener()
+        if (pager?.isNotEmpty == true) {
+            pager?.removeOnPageChangeListener()
             val onPageChangeListenerHelper = buildOnPageChangedListener()
-            pager!!.addOnPageChangeListener(onPageChangeListenerHelper)
-            onPageChangeListenerHelper.onPageScrolled(pager!!.currentItem, 0f)
+            pager?.addOnPageChangeListener(onPageChangeListenerHelper)
+            onPageChangeListenerHelper.onPageScrolled(pager?.currentItem ?: 0, 0f)
         }
     }
 
     private fun refreshDotsSize() {
-        for (i in 0 until pager!!.currentItem) {
-            dots[i].setWidth(dotsSize.toInt())
+        if (dots.size > 0) {
+            for (i in 0 until (pager?.currentItem ?: 0)) {
+                dots[i].setWidth(dotsSize.toInt())
+            }
         }
     }
 
@@ -187,7 +190,7 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
                     "initializing the dots indicator !")
         }
 
-        viewPager.adapter!!.registerDataSetObserver(object : DataSetObserver() {
+        viewPager.adapter?.registerDataSetObserver(object : DataSetObserver() {
             override fun onChanged() {
                 super.onChanged()
                 refreshDots()
@@ -203,7 +206,7 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
                 get() = viewPager.isEmpty
             override val count: Int
                 get() = viewPager.adapter?.count ?: 0
-            override var realCount: Int = if (count < MAX_VP_SIZE) count else  MAX_VP_SIZE
+            override var realCount: Int = if (count < MAX_VP_SIZE) count else MAX_VP_SIZE
                 set(value) {
                     field = value
                     refreshDots()
@@ -263,7 +266,7 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
                 get() = viewPager2.isEmpty
             override val count: Int
                 get() = viewPager2.adapter?.itemCount ?: 1
-            override var realCount: Int = if (count < MAX_VP_SIZE) count else  MAX_VP_SIZE
+            override var realCount: Int = if (count < MAX_VP_SIZE) count else MAX_VP_SIZE
             override val currentItem: Int
                 get() = if (realCount > 0) viewPager2.currentItem % realCount else viewPager2.currentItem
 
