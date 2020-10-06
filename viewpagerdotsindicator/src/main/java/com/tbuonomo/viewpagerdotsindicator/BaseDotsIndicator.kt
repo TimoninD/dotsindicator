@@ -285,8 +285,11 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
                     override fun onPageScrolled(position: Int, positionOffset: Float,
                                                 positionOffsetPixels: Int) {
                         super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                        onPageChangeListenerHelper.onPageScrolled(position % (if (pager?.realCount != null && pager?.realCount ?: 0 > 0) pager?.realCount
-                                ?: 1 else 1), positionOffset)
+                        onPageChangeListenerHelper.onPageScrolled(if ((pager?.realCount ?: 0) > 0) {
+                            position % (pager?.realCount ?: 1)
+                        } else {
+                            0
+                        }, positionOffset)
                     }
                 }
                 viewPager2.registerOnPageChangeCallback(onPageChangeCallback!!)
