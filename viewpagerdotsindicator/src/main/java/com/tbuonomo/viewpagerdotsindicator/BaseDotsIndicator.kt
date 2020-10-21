@@ -105,11 +105,9 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
     }
 
     private fun refreshDotsCount() {
-        if (dots.size < (pager?.realCount ?: dots.size)) {
+        if (dots.size != (pager?.realCount ?: dots.size)) {
             removeDots(dots.size)
             addDots(pager?.realCount ?: dots.size)
-        } else if (dots.size > pager?.realCount ?: dots.size) {
-            removeDots(dots.size - (pager?.realCount ?: dots.size))
         }
     }
 
