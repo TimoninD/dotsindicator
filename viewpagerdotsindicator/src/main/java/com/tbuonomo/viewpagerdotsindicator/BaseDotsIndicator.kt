@@ -105,8 +105,9 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
     }
 
     private fun refreshDotsCount() {
-        if (dots.size < (pager?.realCount?.toFloat() ?: dots.size.toFloat())) {
-            addDots(pager?.realCount ?: dots.size - dots.size)
+        if (dots.size < (pager?.realCount ?: dots.size)) {
+            removeDots(dots.size)
+            addDots(pager?.realCount ?: dots.size)
         } else if (dots.size > pager?.realCount ?: dots.size) {
             removeDots(dots.size - (pager?.realCount ?: dots.size))
         }
@@ -185,7 +186,7 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
     }
 
     fun setViewPager(viewPager: ViewPager) {
-        dots.clear() 
+        dots.clear()
         if (viewPager.adapter == null) {
             throw IllegalStateException("You have to set an adapter to the view pager before " +
                     "initializing the dots indicator !")
