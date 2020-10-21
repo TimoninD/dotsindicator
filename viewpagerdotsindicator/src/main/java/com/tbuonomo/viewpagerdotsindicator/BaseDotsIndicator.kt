@@ -186,7 +186,6 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
     }
 
     fun setViewPager(viewPager: ViewPager) {
-        dots.clear()
         if (viewPager.adapter == null) {
             throw IllegalStateException("You have to set an adapter to the view pager before " +
                     "initializing the dots indicator !")
@@ -246,7 +245,6 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
     }
 
     fun setViewPager2(viewPager2: ViewPager2) {
-        dots.clear()
         if (viewPager2.adapter == null) {
             throw IllegalStateException("You have to set an adapter to the view pager before " +
                     "initializing the dots indicator !")
