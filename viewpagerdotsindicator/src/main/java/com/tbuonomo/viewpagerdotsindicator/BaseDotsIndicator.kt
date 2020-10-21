@@ -299,6 +299,11 @@ abstract class BaseDotsIndicator @JvmOverloads constructor(context: Context,
         refreshDots()
     }
 
+    fun removeViewPager2() {
+        pager = null
+    }
+
+
     // EXTENSIONS
 
     fun View.setWidth(width: Int) {
